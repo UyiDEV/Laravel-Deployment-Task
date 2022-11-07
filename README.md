@@ -1,4 +1,4 @@
-# Laravel-Deployment-Task
+# AltSchool Laravel-Deployment-Task
 ## Question
 
 You are required to deploy the same Laravel application from your mini project. This time, the entire deployment steps including installation of packages and dependencies, configuring your apache webserver etc, will be defined in an ansible playbook and deployed to atleast one ansible slave. You should also write a bash script that would install and set up postgresql. This bash script would be run on your ansible slaves using an ansible playbook.  
