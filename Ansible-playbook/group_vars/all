@@ -1,0 +1,8 @@
+php_version: 8.1
+username: highclass
+vhost_name: lavarel_project
+server_document_root: "/var/www/html"
+
+apache_vhosts:
+  - {servername: "php.darvein.xyz", serveralias: "www.php.darvein.xyz", documentroot: "/var/www/html/lavarel_project/public"}
+
