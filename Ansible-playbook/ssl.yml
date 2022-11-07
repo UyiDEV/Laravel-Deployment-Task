@@ -24,4 +24,4 @@
 
   - name: install ssl certificate
     tags: certificate
-    command: sudo certbot --apache --agree-tos --non-interactive --redirect -m lorrianetracy140@gmail.com.com -d altschoolcloudproject.me -d www.altschoolcloudproject.me
+    command: sudo certbot --apache --agree-tos --non-interactive --redirect -m osakueomoruyi@gmail.com.com -d osakueomoruyi.me -d www.osakueomoruyi.me

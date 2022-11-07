@@ -5,24 +5,23 @@
   tasks:
 
 
-  - name: create james user
+  - name: create emma user
     tags: always
     user:
-      name: james
+      name: emma
       groups: root
 
-  - name: add ssh key for james
+  - name: add ssh key for emma
     tags: always
     authorized_key:
-      user: james
-      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQ/iBj3j4XG2N4Xss4KT75JlRyG1AflN8pErI+av+F8Z2/kikZIz7Z/cEXAnm9+Axeuc5KljwHiPO8djk40XF8nVai2iig/OZQMRpx/DyQNGx+uWqYIP1DrZ24sXhG20pmbDhdlLdjJljBHpHhV1ksBmtrHOqltes/a8g3p21kv7Lei6B5HK/+mIrigHwLX1+soMTiQdkTw4fyW5nF3NuyNU3P>
-"
+      user: emma
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNVa9UvH1Ijvw37WwGXWGpPtDEiuzXfnEm8cR/ILo2E/Q5EaWdPJMrvqhOUHU/A+Ebh5Tot+kQUpFA03+n4MireRANo/baO8XoKSjfxTzRr2LnZoIBqkZbgIgjHAmocegvaDUHxLz5y9DdS3OaSk615Kk28U/il3dZHvLLuxdgIwIGFL+n018rnWu0i/Dh4OVBoiBXGD2jPvDtFfdsmk/2Gcxxgwi6NwUBQowj8/LAR7lMPpI9etwyC7sbhg3zUF6xUZwkdfKS+bl+IWsgbBqsF+9DPFuSPtIVr1WS+WBsz/y+8bzlmSTXK+g+DCK8nOVE1bRGGMLxYZt93bXtJtyl exam"
 
-  - name: add sudoers file for james
+  - name: add sudoers file for emma
     tags: always
     copy:
-      src: sudoer_james
-      dest: /etc/sudoers.d/james
+      src: sudoer_emma
+      dest: /etc/sudoers.d/emma
       owner: root
       mode: '0440'
       group: root

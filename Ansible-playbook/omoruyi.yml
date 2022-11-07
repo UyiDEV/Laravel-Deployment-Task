@@ -116,12 +116,12 @@
       update_cache: yes
 
   - name: create a new database
-    mysql_db: name=lorraine state=present login_user=root login_password=""
+    mysql_db: name=omoruyi state=present login_user=root login_password=""
 
   - name: creating mysql user (medium_post)
     mysql_user:
-      name: "lorraine"
-      password: "Tecdora"
+      name: "omoruyi"
+      password: "highclass"
       priv: '.:ALL'
       host: '%'
       state: present
@@ -159,13 +159,13 @@
 
   - name: check if git repo exist
     stat:
-      path: /var/www/html/lorraine
+      path: /var/www/html/omoruyi
     register: repo
 
   - name: clone repository
     git:
       repo: https://github.com/f1amy/laravel-realworld-example-app.git
-      dest: /var/www/html/lorraine
+      dest: /var/www/html/omoruyi
     register: env
     when: not repo.stat.exists
 
@@ -175,14 +175,14 @@
   - name: copy .env file into application
     copy:
       src: .env
-      dest: /var/www/html/lorraine
+      dest: /var/www/html/omoruyi
     #when: env.changed
 
 
   - name: change permission
     file:
-      dest: /var/www/html/lorraine
-      owner: james
+      dest: /var/www/html/omoruyi
+      owner: emma
       group: www-data
       mode: 0775
       recurse: yes
@@ -192,8 +192,8 @@
   - name: change permission for storage
     tags: storage
     file:
-      dest: /var/www/html/lorraine/storage
-      owner: james
+      dest: /var/www/html/omoruyi/storage
+      owner: emma
       group: www-data
       mode: 0775
       recurse: yes
@@ -214,7 +214,7 @@
 
   - name: install dependencies using composer
     command:
-      chdir: /var/www/html/lorraine
+      chdir: /var/www/html/omoruyi
       argv:
         - composer
         - install
@@ -227,7 +227,7 @@
 
   - name: generate key for application
     command:
-      chdir: /var/www/html/lorraine
+      chdir: /var/www/html/omoruyi
       argv:
         - php
         - artisan
@@ -238,7 +238,7 @@
 
   - name: migrate database
     command:
-      chdir: /var/www/html/lorraine
+      chdir: /var/www/html/omoruyi
       argv:
         - php
         - artisan
@@ -249,7 +249,7 @@
 
 #  - name: clear cache
  #   command:
-  #    chdir: /var/www/html/lorraine
+  #    chdir: /var/www/html/omoruyi
    #   argv:
     #    - php
      #   - artisan
@@ -260,7 +260,7 @@
 
   - name: copy apache config file
     copy:
-      src: nwokolo.conf
+      src: osakue.conf
       dest: /etc/apache2/sites-available/
     #when: env.changed
 
@@ -280,7 +280,7 @@
     command:
       argv:
        - a2ensite
-       - nwokolo.conf
+       - osakue.conf
     #when: env.changed
 
 
