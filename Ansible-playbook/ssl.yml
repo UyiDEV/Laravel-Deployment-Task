@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: update the app
+    command: sudo apt update
+
+  - name: install snapd
+    command: sudo apt install snapd -y
+
+  - name: install core
+    command: sudo snap install core
+
+  - name: refresh core
+    command: sudo snap refresh core
+
+  - name: install certbot
+    command: sudo snap install --classic certbot
+
+  - name: change file locatiom
+    command: sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+  - name: install ssl certificate
+    tags: certificate
+    command: sudo certbot --apache --agree-tos --non-interactive --redirect -m lorrianetracy140@gmail.com.com -d altschoolcloudproject.me -d www.altschoolcloudproject.me
