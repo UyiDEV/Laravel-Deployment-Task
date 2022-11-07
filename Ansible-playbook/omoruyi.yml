@@ -304,7 +304,7 @@
       - run_postgres
     script: postgresql.sh
 
-  - name: check that postgres is installed
+  - name: check that postgresql is installed
     tags:
       - postgres
     command: sudo -u postgres psql -c "SELECT version()
