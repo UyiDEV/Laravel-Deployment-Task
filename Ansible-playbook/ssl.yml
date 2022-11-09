@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: 13.42.11.21
   become: yes
   tasks:
 

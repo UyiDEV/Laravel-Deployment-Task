@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: 13.42.11.21
   become: yes
   tasks:
 
@@ -116,9 +116,9 @@
       update_cache: yes
 
   - name: create a new database
-    mysql_db: name=omoruyi state=present login_user=root login_password=""
+    mysql_db: name=emmanuel state=present login_user=root login_password=""
 
-  - name: creating mysql user (medium_post)
+  - name: creating mysql user
     mysql_user:
       name: "omoruyi"
       password: "highclass"
@@ -159,13 +159,13 @@
 
   - name: check if git repo exist
     stat:
-      path: /var/www/html/omoruyi
+      path: /var/www/html/emmanuel
     register: repo
 
   - name: clone repository
     git:
       repo: https://github.com/f1amy/laravel-realworld-example-app.git
-      dest: /var/www/html/omoruyi
+      dest: /var/www/html/emmanuel
     register: env
     when: not repo.stat.exists
 
@@ -175,29 +175,29 @@
   - name: copy .env file into application
     copy:
       src: .env
-      dest: /var/www/html/omoruyi
-    #when: env.changed
+      dest: /var/www/html/emmanuel
+    when: env.changed
 
 
   - name: change permission
     file:
-      dest: /var/www/html/omoruyi
+      dest: /var/www/html/emmanuel
       owner: emma
       group: www-data
       mode: 0775
       recurse: yes
-    #when: env.changed
+    when: env.changed
 
 
   - name: change permission for storage
     tags: storage
     file:
-      dest: /var/www/html/omoruyi/storage
+      dest: /var/www/html/emmanuel/storage
       owner: emma
       group: www-data
       mode: 0775
       recurse: yes
-    #when: env.changed
+    when: env.changed
 
   #- name: install composer updates
   #  command:
@@ -214,47 +214,47 @@
 
   - name: install dependencies using composer
     command:
-      chdir: /var/www/html/omoruyi
+      chdir: /var/www/html/emmanuel
       argv:
         - composer
         - install
     become: false
        # - --no-interaction
-   # when: env.changed
+    when: env.changed
 
 
 # generate key for application
 
   - name: generate key for application
     command:
-      chdir: /var/www/html/omoruyi
+      chdir: /var/www/html/emmanuel
       argv:
         - php
         - artisan
         - key:generate
     #when: env.changed
 
-# migrate database
+ migrate database
 
   - name: migrate database
     command:
-      chdir: /var/www/html/omoruyi
+      chdir: /var/www/html/emmanuel
       argv:
         - php
         - artisan
         - migrate
         - --seed
-    #when: env.changed
+    when: env.changed
 
 
-#  - name: clear cache
- #   command:
-  #    chdir: /var/www/html/omoruyi
-   #   argv:
-    #    - php
-     #   - artisan
-      #  - cache:clear
-    #when: env.changed
+  - name: clear cache
+    command:
+      chdir: /var/www/html/emmanuel
+      argv:
+        - php
+        - artisan
+        - cache:clear
+    when: env.changed
 
 # create config file for apache
 
@@ -298,13 +298,13 @@
 # to install postgresql
 
 
-  - name: run script setup
-    tags:
-      - postgre
-      - run_postgres
-    script: postgresql.sh
+#  - name: run script setup
+#    tags:
+#      - postgre
+#      - run_postgres
+#    script: postgresql.sh
 
-  - name: check that postgresql is installed
-    tags:
-      - postgres
-    command: sudo -u postgres psql -c "SELECT version()
+#  - name: check that postgresql is installed
+#    tags:
+#      - postgres
+#    command: sudo -u postgres psql -c "SELECT version()
